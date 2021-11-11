@@ -2,20 +2,27 @@ package com.webapp.insurance;
 
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import org.hibernate.engine.transaction.jta.platform.internal.OC4JJtaPlatform;
+import javax.persistence.Table;
 
 @Entity // This tells Hibernate to make a table out of this class
+@Table(name = "users")
 public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
+
+  @Column(nullable = false, unique = true, length = 16)
   private String name;
+
+  @Column(nullable = false, length = 256)
   private String password;
+
+  @Column(nullable = false, unique = true, length = 45)
   private String email;
 
   
