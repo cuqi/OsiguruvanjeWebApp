@@ -1,15 +1,20 @@
 package com.webapp.insurance;
 
 import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
-@RestController
-@RequestMapping(path = "/account")
+import ch.qos.logback.core.encoder.EncoderBase;
+
+@Controller
 public class AccountController {
 
     @Autowired // This means to get the bean called userRepository
@@ -19,18 +24,30 @@ public class AccountController {
         this.userRepository = userRepository;
     }
     
-    @GetMapping(path = "/getAllUsers")
-    public @ResponseBody Iterable<User> getAllUsers() {
-        // This returns a JSON or XML with the users
-        return userRepository.findAll();
-      }
+  // GET ALL USERS
+  @GetMapping(path = "/getAllUsers")
+  public @ResponseBody Iterable<User> getAllUsers() {
+      // This returns a JSON or XML with the users
+      return userRepository.findAll();
+    }
 
-    @PostMapping(path = "/newAccount")
+    // // POST PROCESS REGISTER
+    // @PostMapping(path = "/process_register")
+    // public String proccessRegister(User user) {
+    //   BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    //   String encodedPassword = passwordEncoder.encode(user.getPassword());
+    //   user.setPassword(encodedPassword);
+
+    //   userRepository.save(user);
+
+    //   return "register_success";
+    // }
+
+    // POST NEW USER
+    @PostMapping(path = "/newUser")
     public User newAccount(@RequestBody User newAccount) {
         return userRepository.save(newAccount);
     }
-
-    //@GetMapping(path = "/n")
 }
 
 
