@@ -20,9 +20,9 @@ public class MainController {
   // GET REGISTER
   @GetMapping("/register")
   public ModelAndView showRegistrationForm(Model model) {
-  model.addAttribute("user", new User());
-  ModelAndView modelAndView = new ModelAndView();
-  modelAndView.setViewName("signup_form");
+    model.addAttribute("user", new User());
+    ModelAndView modelAndView = new ModelAndView();
+    modelAndView.setViewName("signup_form");
 
     return modelAndView;
   }
@@ -41,8 +41,7 @@ public class MainController {
   }
       
   @PostMapping(path="/add") // Map ONLY POST Requests
-  public @ResponseBody String addNewUser (@RequestParam String name
-      , @RequestParam String email) {
+  public @ResponseBody String addNewUser (@RequestParam String name, @RequestParam String email) {
     // @ResponseBody means the returned String is the response, not a view name
     // @RequestParam means it is a parameter from the GET or POST request
 
