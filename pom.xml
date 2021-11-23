@@ -54,11 +54,11 @@
 			<groupId>org.springframework.boot</groupId> 
 			<artifactId>spring-boot-starter-thymeleaf</artifactId> 
 		</dependency>
-<!-- 
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency> -->
+		</dependency> 
 
 		<dependency>
 			<groupId>org.webjars</groupId>
@@ -83,7 +83,7 @@
 			<version>0.42</version>
 		</dependency> -->
 
-		<!-- <dependency>
+	 	<dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
             <version>5.5.3</version>
@@ -99,7 +99,7 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
             <version>5.5.3</version>
-        </dependency> -->
+        </dependency> 
 
 		<dependency>
 			<groupId>org.springframework.security</groupId>
