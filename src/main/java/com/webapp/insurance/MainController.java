@@ -5,6 +5,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +27,34 @@ public class MainController {
 
     return modelAndView;
   }
+
+  // GET LOGIN
+  @GetMapping("/login")
+  public ModelAndView showLoginForm(Model model) {
+    model.addAttribute("userLogin", new UserLogin());
+    ModelAndView modelAndView = new ModelAndView();
+    modelAndView.setViewName("login");
+    return modelAndView;
+  }
+
+  // POST LOGN
+  @PostMapping("/login")
+  public String processLogin(@ModelAttribute UserLogin userLogin, Model model) {
+    System.out.println(userLogin.getUsername() + " " + userLogin.getPassword());
+    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    String encodedPassword = passwordEncoder.encode(userLogin.getPassword());
+    System.out.println(encodedPassword);
+
+    User user = userRepository.findByUsername(userLogin.getUsername(), userLogin.getPassword());
+    if (user == null) {
+      return "login?error";
+    } else {
+      System.out.println("is ok!");
+    }
+
+    return "login_success";
+  }
+
   // POST PROCESS REGISTER
   @PostMapping("/process_register")
   public String proccessRegister(User user) {
