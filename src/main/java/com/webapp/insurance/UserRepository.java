@@ -11,6 +11,6 @@ public interface UserRepository extends CrudRepository<User, Integer>{
     @Query("SELECT u FROM User u WHERE u.name = ?1")
     public User findByEmail(String name);
 
-    @Query("SELECT u FROM User u WHERE u.name = ?1 and u.password = ?2")
-    public User findByUsername(String username, String password);
+    // @Query("SELECT u FROM User u WHERE u.name = ?1 and u.password = ?2")
+    // public User findByUsername(String username, String password);
 }

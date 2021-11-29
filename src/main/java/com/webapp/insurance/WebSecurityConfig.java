@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -38,6 +39,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return authProvider;
     }
 
+    @Bean
+    public AuthenticationSuccessHandler appAuthenticationSuccessHandler() {
+        return new AppAuthenticationSuccessHandler();
+    }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider());
@@ -51,11 +57,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
             .formLogin()
                 .loginPage("/login")
-                // .usernameParameter("email")
-                // .defaultSuccessUrl("/users")
+                .loginProcessingUrl("/process_login")
+                //.successHandler(new AppAuthenticationSuccessHandler())
+                //.successForwardUrl("/login_success")
+                //.defaultSuccessUrl("/index.html", true)
                 .permitAll()
             .and()
-            .logout().logoutSuccessUrl("/").permitAll();
+            .logout().deleteCookies("JSESSIONID").logoutSuccessUrl("/").permitAll();
+
+        http.csrf().disable();
     }
 }
 
