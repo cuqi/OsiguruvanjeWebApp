@@ -1,7 +1,10 @@
 package com.webapp.insurance;
 
-import com.webapp.webservice.SOAPService;
-import com.webapp.webservice.converterClient.SOAPServiceService;
+import com.webapp.classes.travelInsurance.TravelInfoModel;
+import com.webapp.classes.travelInsurance.TravelInfoModel.*;
+import com.webapp.webservice.ver1.*;
+
+import java.io.UnsupportedEncodingException;
 
 import javax.xml.ws.Endpoint;
 
@@ -13,26 +16,32 @@ import javax.xml.ws.Endpoint;
 public class TestClass {
     
 
-    public static void main (String[] args) {
+    public static void main (String[] args) throws UnsupportedEncodingException {
 
-        final String url = "http://localhost:8000/myservice";
-        System.out.println("Publishing Service at endpoint " + url);
-        
-        Endpoint.publish(url, new SOAPService());
-        
-        SOAPServiceService service = new SOAPServiceService();
-        System.out.println("SERVICE NAME: " + service.getServiceName());
+        // TravelInfoModel travelInfoModel = new TravelInfoModel();
+        // travelInfoModel.setType(TypeTravelPolicyModel.BUSINESS);
 
-        com.webapp.webservice.converterClient.SOAPService port = service.getSOAPServicePort();
-        System.out.println("SERVICE NAME: " + port.toString());
+        // TypeTravelPolicy tp = TypeTravelPolicy.valueOf(travelInfoModel.getType().toString());
+        // System.out.println(tp.value());
 
-        System.out.println(port.converter("20"));
-        /*
-        MyServiceService service = new MyServiceService();
-        System.out.println("SERVICE NAME: " + service.getServiceName());
-        MyService port = service.getMyServicePort();
-        System.out.println("SERVICE NAME: " + port.toString());
-        */
+
+        // MyServiceService service = new MyServiceService();
+        // MyService port = service.getMyServicePort();
+
+        // TravelInfo travelInfo2 = new TravelInfo();
+        // travelInfo2.setType(TypeTravelPolicy.valueOf("INDIVIDUAL"));
+        // travelInfo2.setCover(TypeCover.CLASSIC);
+        // travelInfo2.setDays(travelInfoModel.getDays());
+        // travelInfo2.setNumPeople(1);
+        // travelInfo2.setCountry("Greece");
+
+        // QuotationResponse qr = port.getTravelQuotation(travelInfo2, "");
+
+        // System.out.println("code: " + qr.getCode() + ", premium: " + qr.getPremium());
+
+        // //model.addAttribute("travelInfo", travelInfoModel);
+        // System.out.println(travelInfoModel.getDays() + " " + travelInfoModel.getCountry() + " " + travelInfoModel.getCover());
+
     }
     
 }

@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Automobile Liability Insurance</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+    <script src="/webjars/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <div class="card border-primary mb-3" style="max-width: 50rem;">
+        <div class="card-header">Automobile Liability Insurance</div>
+        <div class="card-body">
+          <h4 class="card-title">Calculate premium</h4>
+          <div class="container text-center">
+            <form id="aoForm" th:action="@{/insurance/liabilityPost}" th:object="${aoInfo}"
+                method="post" style="max-width: 600px; margin: 0 auto;">
+            <div class="m-3">
+                <div class="form-group row">
+                    <label class="col-4 col-form-label">Vehicle chassis</label>
+                    <div class="col-8">
+                        <input type="text" th:field="*{chassis}" class="form-control" required/>
+                    </div>
+                </div> 
+                <div class="form-group row">
+                    <label class="col-4 col-form-label">Vehicle registration number</label>
+                    <div class="col-8">
+                        <input type="text" th:field="*{regNum}" class="form-control" required/>
+                    </div>
+                </div>    
+                <div class="form-group row">
+                    <label class="col-4 col-form-label">Vehicle owners SSN</label>
+                    <div class="col-8">
+                        <input type="text" th:field="*{ssn}" class="form-control" required/>
+                    </div>
+                </div>   
+                <div>
+                    <button id="submit-form" type="submit" class="btn btn-primary">Calculate</button>
+                </div>
+            </div>
+            </form>
+            <div>
+              <p th:text="${messageAO}"></p>
+              <p th:text="${premiumAO}"></p>
+            </div>
+        </div>
+
+        </div>
+      </div>
+</body>
+</html>
