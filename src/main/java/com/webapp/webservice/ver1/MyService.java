@@ -80,23 +80,23 @@ public interface MyService {
         @WebParam(name = "sessionID", targetNamespace = "")
         String sessionID);
 
-    /**
-     * 
-     * @param accidentInfo
-     * @param sessionID
-     * @return
-     *     returns ver1.QuotationResponse
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getAccidentQuotation", targetNamespace = "http://myservice/", className = "ver1.GetAccidentQuotation")
-    @ResponseWrapper(localName = "getAccidentQuotationResponse", targetNamespace = "http://myservice/", className = "ver1.GetAccidentQuotationResponse")
-    @Action(input = "http://myservice/MyService/getAccidentQuotationRequest", output = "http://myservice/MyService/getAccidentQuotationResponse")
-    public QuotationResponse getAccidentQuotation(
-        @WebParam(name = "AccidentInfo", targetNamespace = "")
-        AccidentInfo accidentInfo,
-        @WebParam(name = "sessionID", targetNamespace = "")
-        String sessionID);
+    // /**
+    //  * 
+    //  * @param accidentInfo
+    //  * @param sessionID
+    //  * @return
+    //  *     returns ver1.QuotationResponse
+    //  */
+    // @WebMethod
+    // @WebResult(targetNamespace = "")
+    // @RequestWrapper(localName = "getAccidentQuotation", targetNamespace = "http://myservice/", className = "ver1.GetAccidentQuotation")
+    // @ResponseWrapper(localName = "getAccidentQuotationResponse", targetNamespace = "http://myservice/", className = "ver1.GetAccidentQuotationResponse")
+    // @Action(input = "http://myservice/MyService/getAccidentQuotationRequest", output = "http://myservice/MyService/getAccidentQuotationResponse")
+    // public QuotationResponse getAccidentQuotation(
+    //     @WebParam(name = "AccidentInfo", targetNamespace = "")
+    //     AccidentInfo accidentInfo,
+    //     @WebParam(name = "sessionID", targetNamespace = "")
+    //     String sessionID);
 
     /**
      * 

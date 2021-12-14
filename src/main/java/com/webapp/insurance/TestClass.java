@@ -2,9 +2,16 @@ package com.webapp.insurance;
 
 import com.webapp.classes.travelInsurance.TravelInfoModel;
 import com.webapp.classes.travelInsurance.TravelInfoModel.*;
+import com.webapp.insurance.database.Session;
+import com.webapp.insurance.database.SessionRepository;
 import com.webapp.webservice.ver1.*;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+
 import java.io.UnsupportedEncodingException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 import javax.xml.ws.Endpoint;
 
@@ -15,9 +22,12 @@ import javax.xml.ws.Endpoint;
 
 public class TestClass {
     
-
     public static void main (String[] args) throws UnsupportedEncodingException {
 
+    
+        BCrypt bCrypt = new BCrypt();
+        System.out.println(bCrypt.gensalt());        
+        //sessionRepository.save(session);
         // TravelInfoModel travelInfoModel = new TravelInfoModel();
         // travelInfoModel.setType(TypeTravelPolicyModel.BUSINESS);
 

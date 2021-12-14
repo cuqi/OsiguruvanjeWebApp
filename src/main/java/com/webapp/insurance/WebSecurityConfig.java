@@ -58,12 +58,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/process_login")
-                //.successHandler(new AppAuthenticationSuccessHandler())
-                //.successForwardUrl("/login_success")
+                .successHandler(appAuthenticationSuccessHandler())
+                //.successForwardUrl("/index")
                 //.defaultSuccessUrl("/index.html", true)
                 .permitAll()
             .and()
-            .logout().deleteCookies("JSESSIONID").logoutSuccessUrl("/").permitAll();
+            .logout().logoutUrl("/logout").invalidateHttpSession(true).deleteCookies("JSESSIONID").logoutSuccessUrl("/").permitAll();
 
         http.csrf().disable();
     }
