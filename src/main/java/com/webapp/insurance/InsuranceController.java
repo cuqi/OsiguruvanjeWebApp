@@ -1,19 +1,12 @@
 package com.webapp.insurance;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.GregorianCalendar;
-
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
-
 import com.webapp.classes.accidentInsurance.AccidentInfoModel;
 import com.webapp.classes.cascoInsurance.CascoInfoModel;
 import com.webapp.classes.householdInsurance.HouseholdInfoModel;
 import com.webapp.classes.liabilityInsurance.AOInfoModel;
+import com.webapp.classes.travelInsurance.BookTPLModel;
 import com.webapp.classes.travelInsurance.TravelInfoModel;
-import com.webapp.webservice.ver1.*;
+import com.webapp.webservice.ver2.*;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,9 +17,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.servlet.ModelAndView;
-import com.webapp.insurance.AppAuthenticationSuccessHandler;
 
 @Controller 
 @RequestMapping(path = "/insurance")
@@ -54,7 +44,6 @@ public class InsuranceController {
     @GetMapping(path = "/travel")
     public String showTravelInsurance(Model model) {
         model.addAttribute("travelInfo", new TravelInfoModel());
-        //model.addAttribute("sessionID", AppAuthenticationSuccessHandler.defaultProperties.getProperty("sessionID"));
         model.addAttribute("premiumTravel", premiumTravel);
         model.addAttribute("daysUpdate", daysUpdate);
         model.addAttribute("messageTravel", messageTravel);
@@ -88,6 +77,7 @@ public class InsuranceController {
                 System.out.println("UPDATED DAYS:" + daysUpdate + ";" + travelInfoModel.getDays() + " " + travelInfoModel.getCountry() + " " + travelInfoModel.getCover() + " " + travelInfoModel.getType());
                 model.addAttribute("travelInfo", travelInfoModel);
                 messageTravel = "Премијата изнесува:";
+                return "redirect:/insurance/travel/createTPL";
             } else if (qr.getCode() == 106) {
                 messageTravel = "Максимален број на осигурани лица е 10";
             } else if (qr.getCode() == 107) {
@@ -109,13 +99,26 @@ public class InsuranceController {
         
         return "redirect:/insurance/travel";
     }
+
+    @GetMapping(path = "/travel/createTPL")
+    public String bookTravelPolicy(Model model) {
+        model.addAttribute("bookTPLInfo", new BookTPLModel());
+        model.addAttribute("premiumTravel", premiumTravel);
+        model.addAttribute("messageTravel", messageTravel);
+        return "book_tpl_form";
+    }
+
+    @PostMapping(path = "/travel/createTPLPost")
+    public String processCreateTPL(@ModelAttribute BookTPLModel bookTPLModel, Model model) {
+        return "redirect:/insurance/travel/createTPL";
+    }
     /* GET HOUSEHOLD REQUEST */
     @GetMapping(path = "/household")
     public String showHouseholdInsurance(Model model) {
         model.addAttribute("householdInfo", new HouseholdInfoModel());
         model.addAttribute("premiumHousehold", premiumHousehold);
         model.addAttribute("messageHousehold", messageHousehold);
-        return "ao_form";
+        return "household_form";
     }
     /* POST HOUSEHOLD REQUEST */
     @PostMapping(path = "/householdPost")
@@ -150,6 +153,7 @@ public class InsuranceController {
 
         return "redirect:/insurance/household";
     }
+
     /* GET LIABILITY REQUEST */
     @GetMapping(path = "/liability")
     public String showAOInsurance(Model model) {
