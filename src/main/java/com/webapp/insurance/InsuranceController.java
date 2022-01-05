@@ -241,51 +241,51 @@ public class InsuranceController {
         return "accident_form";
     }
     /* POST ACCIDENT REQUEST */
-    // @PostMapping(path = "/accidentPost")
-    // public String processAccident(@ModelAttribute AccidentInfoModel accidentInfoModel, Model model) {
-    //     MyServiceService service = new MyServiceService();
-    //     MyService port = service.getMyServicePort();
+    @PostMapping(path = "/accidentPost")
+    public String processAccident(@ModelAttribute AccidentInfoModel accidentInfoModel, Model model) {
+        MyServiceService service = new MyServiceService();
+        MyService port = service.getMyServicePort();
 
-    //     System.out.println("Date entered is: " + accidentInfoModel.getStartDate());
-    //     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-    //     GregorianCalendar c = new GregorianCalendar();
-    //     XMLGregorianCalendar startDate;
-    //     AccidentInfo accidentInfo = new AccidentInfo();
-    //     try {
-    //         c.setTime(format.parse(accidentInfoModel.getStartDate()));
-    //         startDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
-    //         accidentInfo.setStartDate(startDate);
-    //     } catch (ParseException e1) {
-    //         e1.printStackTrace();
-    //     } catch (DatatypeConfigurationException e) {
-    //         e.printStackTrace();
-    //     }
+        System.out.println("Date entered is: " + accidentInfoModel.getStartDate());
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        GregorianCalendar c = new GregorianCalendar();
+        XMLGregorianCalendar startDate;
+        AccidentInfo accidentInfo = new AccidentInfo();
+        try {
+            c.setTime(format.parse(accidentInfoModel.getStartDate()));
+            startDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
+            accidentInfo.setStartDate(startDate);
+        } catch (ParseException e1) {
+            e1.printStackTrace();
+        } catch (DatatypeConfigurationException e) {
+            e.printStackTrace();
+        }
 
-    //     accidentInfo.setIsStudent(accidentInfoModel.isStudent());
-    //     accidentInfo.setPack(accidentInfoModel.getPack());
+        accidentInfo.setIsStudent(accidentInfoModel.isStudent());
+        accidentInfo.setPack(accidentInfoModel.getPack());
 
-    //     QuotationResponse qr = port.getAccidentQuotation(accidentInfo, "");
-    //     if (qr == null) {
-    //         System.out.println("qr is null!");
-    //         premiumAccident = "0";
-    //         messageAccident = "Настана грешка! Обидете се повторно!";
-    //         return "redirect:/insurance/accident";
-    //     } else {
-    //         if (qr.getCode() == 100) {
-    //             System.out.println("code: " + qr.getCode() + ", premium: " + qr.getPremium());
-    //             premiumAccident = String.valueOf(qr.getPremium());
-    //             System.out.println("pack: " + accidentInfoModel.getPack() + ", startdate: " + accidentInfoModel.getStartDate());                
-    //             model.addAttribute("accidentInfoModel", accidentInfoModel);
-    //             messageAccident = "Премијата изнесува:";
-    //         } else {
-    //             messageAccident = String.valueOf(qr.getCode());
-    //             premiumAccident = String.valueOf(qr.getPremium());
-    //         }
-    //         // TODO
-    //     }
+        // QuotationResponse qr = port.getAccidentQuotation(accidentInfo, "");
+        // if (qr == null) {
+        //     System.out.println("qr is null!");
+        //     premiumAccident = "0";
+        //     messageAccident = "Настана грешка! Обидете се повторно!";
+        //     return "redirect:/insurance/accident";
+        // } else {
+        //     if (qr.getCode() == 100) {
+        //         System.out.println("code: " + qr.getCode() + ", premium: " + qr.getPremium());
+        //         premiumAccident = String.valueOf(qr.getPremium());
+        //         System.out.println("pack: " + accidentInfoModel.getPack() + ", startdate: " + accidentInfoModel.getStartDate());                
+        //         model.addAttribute("accidentInfoModel", accidentInfoModel);
+        //         messageAccident = "Премијата изнесува:";
+        //     } else {
+        //         messageAccident = String.valueOf(qr.getCode());
+        //         premiumAccident = String.valueOf(qr.getPremium());
+        //     }
+        //     // TODO
+        // }
 
-    //     return "redirect:/insurance/accident";
-    // }
+        return "redirect:/insurance/accident";
+    }
 
     public String getUserDetails(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

@@ -1,15 +1,20 @@
 package com.webapp.insurance;
 
+import java.io.IOException;
+
 import com.webapp.insurance.database.Session;
 import com.webapp.insurance.database.SessionRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
+import org.springframework.http.MediaType;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,6 +28,9 @@ public class MainController {
   
   @Autowired
   private SessionRepository sessionRepository;
+
+  @Autowired
+  private Environment env;
 
   // GET REGISTER
   @GetMapping("/register")
@@ -113,4 +121,25 @@ public class MainController {
     // This returns a JSON or XML with the users
     return userRepository.findAll();
   }
+
+  // PAYPAL
+  @GetMapping("/payment")
+  public ModelAndView showPaymentForm(Model model) {
+    ModelAndView modelAndView = new ModelAndView();
+    modelAndView.setViewName("paypay");
+
+    return modelAndView;
+  }
+
+  // HOMEPAGE
+  @GetMapping("/homepage")
+  public ModelAndView showHomepage(Model model) {
+    System.out.println(env.getRequiredProperty("stripe.key.id"));
+
+    ModelAndView modelAndView = new ModelAndView();
+    modelAndView.setViewName("homepage");
+
+    return modelAndView;
+  }
+
 }
