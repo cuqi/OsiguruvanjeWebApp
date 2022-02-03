@@ -18,14 +18,14 @@ public class HouseholdInfoModel {
     public float areaOfObject;                      // kvadratura na objektot
     public String dateOfObject;                     // datum na izgradba na objektot
     public enums.TypeCoverHH typeHouseholdCover;   // tip na pokritieto
-    public int contractLenght;                      // vremetraenje na dogovorot 1, 3 ili 5
+    public String contractLenght;                      // vremetraenje na dogovorot 1, 3 ili 5
 
     public HouseholdInfoModel() {
         areaOfObject = 30;
-        contractLenght = 1;
+        contractLenght = "1";
     }
 
-    public HouseholdInfoModel(enums.TypeObject typeObject, float areaOfObject, String dateOfObject, enums.TypeCoverHH typeHouseholdCover, int contractLenght) {
+    public HouseholdInfoModel(enums.TypeObject typeObject, float areaOfObject, String dateOfObject, enums.TypeCoverHH typeHouseholdCover, String contractLenght) {
         this.typeObject = typeObject;
         this.areaOfObject = areaOfObject;
         this.dateOfObject = dateOfObject;
@@ -65,12 +65,19 @@ public class HouseholdInfoModel {
         this.typeHouseholdCover = typeHouseholdCover;
     }
 
-    public int getContractLenght() {
+    public String getContractLenght() {
         return contractLenght;
     }
 
-    public void setContractLenght(int contractLenght) {
+    public void setContractLenght(String contractLenght) {
         this.contractLenght = contractLenght;
+    }
+
+    @Override
+    public String toString() {
+        return "HouseholdInfoModel [areaOfObject=" + areaOfObject + ", contractLenght=" + contractLenght
+                + ", dateOfObject=" + dateOfObject + ", typeHouseholdCover=" + typeHouseholdCover + ", typeObject="
+                + typeObject + "]";
     }
 
     

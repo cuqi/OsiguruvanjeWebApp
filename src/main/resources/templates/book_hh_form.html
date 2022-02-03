@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Полиса</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <script src="/webjars/jquery/3.6.0/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="card border-primary mb-3" style="max-width: 50rem; margin: auto; margin-top: 5rem;">
+        <div class="card-header">Податоци за договорувачот</div>
+        <div class="card-body">
+            <div class="container text-start">
+                <form id="bookTravelForm" th:action="@{/insurance/createPolicy}" th:object="${bookInfoModel}"
+                    method="post" style="max-width: 600px; margin: auto;">
+                    <div>
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label">Почеток на осигурувањето</label>
+                            <div class="col-8">
+                                <input type="date" th:field="*{startDate}" class="form-control" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-3" id="contractor_data">
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label">Име</label>
+                            <div class="col-8">
+                                <input type="text" th:field="*{c_firstName}" class="form-control" max=50 required />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label">Презиме</label>
+                            <div class="col-8">
+                                <input type="text" th:field="*{c_lastName}" class="form-control" max=50 required />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label">Матичен број</label>
+                            <div class="col-8">
+                                <input type="text" th:field="*{c_ssn}" class="form-control" min=13 max=13 required />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label">Адреса на живеење</label>
+                            <div class="col-8">
+                                <input type="text" th:field="*{c_address}" class="form-control" max=50 required />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label">Поштенски број</label>
+                            <div class="col-8">
+                                <input type="text" th:field="*{c_postalCode}" class="form-control" min=1 max=5
+                                    required />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label">Град</label>
+                            <div class="col-8">
+                                <input type="text" th:field="*{c_city}" class="form-control" required />
+                            </div>
+                        </div>
+                        <div style="margin-top:1rem;"></div>
+                        <div class="form-group" style="margin: auto">
+                            <input id="check_insured" type="checkbox" class="text-center" />
+                            <label>Договорувачот е различен од осигуреникот?</label>
+                        </div>
+                        <div id="insured_data" class="hidden">
+                            <div class="form-group row">
+                                <label class="col-4 col-form-label">Име</label>
+                                <div class="col-8">
+                                    <input type="text" th:field="*{i_firstName}" class="form-control" max=50 />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-4 col-form-label">Презиме</label>
+                                <div class="col-8">
+                                    <input type="text" th:field="*{i_lastName}" class="form-control" max=50 />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-4 col-form-label">Матичен број</label>
+                                <div class="col-8">
+                                    <input type="text" th:field="*{i_ssn}" class="form-control" min=13 max=13 />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-4 col-form-label">Адреса на живеење</label>
+                                <div class="col-8">
+                                    <input type="text" th:field="*{i_address}" class="form-control" max=50 />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-4 col-form-label">Поштенски број</label>
+                                <div class="col-8">
+                                    <input type="text" th:field="*{i_postalCode}" class="form-control" min=1 max=5 />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-4 col-form-label">Град</label>
+                                <div class="col-8">
+                                    <input type="text" th:field="*{i_city}" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-top:2rem;"></div>
+                        <div>
+                            <button id="submit-form" type="submit" class="btn btn-primary" style="float: right;">Кон плаќање</button>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <style>
+        #insured_data.hidden {
+            display: none;
+        }
+    </style>
+    <script>
+        check_insured.addEventListener('change', (e) => {
+            insured_data.classList.toggle('hidden')
+        })
+    </script>
+
+</body>
+
+</html>

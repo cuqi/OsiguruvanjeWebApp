@@ -1,5 +1,7 @@
 package com.webapp.insurance;
 
+import java.util.prefs.Preferences;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
@@ -16,9 +18,14 @@ public class PaymentController {
 
     @RequestMapping("/checkout")
     public String checkout(Model model) {
-        model.addAttribute("amount", 50 * 100); // in cents
+        int amount = 1;
+        if (model.containsAttribute("payment")) {
+            System.out.print("there is payment attr");
+        }
+        
+        model.addAttribute("amount", amount * 100); // in cents
         model.addAttribute("stripePublicKey", secretKey.getRequiredProperty("stripe.key.id"));
-        model.addAttribute("currency", ChargeRequest.Currency.EUR);
+        model.addAttribute("currency", ChargeRequest.Currency.MKD);
         return "checkout";
     }
 }

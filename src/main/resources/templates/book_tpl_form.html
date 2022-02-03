@@ -11,44 +11,90 @@
         <div class="card-header">Travel Insurace</div>
         <div class="card-body">
           <div class="container text-center">
-            <form id="bookTravelForm" th:action="@{/insurance/travel/createTPLPost}" th:object="${bookTPLInfo}"
+            <form id="bookTravelForm" th:action="@{/insurance/travel/createTPLPost}" th:object="${bookModel}"
                 method="post" style="max-width: 600px; margin: 0 auto;">
-            <div class="m-3">
+            <div class="m-3" id="contractor_data">
               <div class="form-group row">
                 <label class="col-4 col-form-label">First name</label>
                 <div class="col-8">
-                    <input type="text" th:field="*{firstName}" class="form-control" max=50 required/>
+                    <input type="text" th:field="*{c_firstName}" class="form-control" max=50 required/>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-4 col-form-label">Last name</label>
                 <div class="col-8">
-                    <input type="text" th:field="*{lastName}" class="form-control" max=50 required/>
+                    <input type="text" th:field="*{c_lastName}" class="form-control" max=50 required/>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-4 col-form-label">SSN</label>
                 <div class="col-8">
-                    <input type="text" th:field="*{ssn}" class="form-control" min=13 max=13 required/>
+                    <input type="text" th:field="*{c_ssn}" class="form-control" min=13 max=13 required/>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-4 col-form-label">Address</label>
                 <div class="col-8">
-                    <input type="text" th:field="*{address}" class="form-control" max=50 required/>
+                    <input type="text" th:field="*{c_address}" class="form-control" max=50 required/>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-4 col-form-label">Postal code</label>
                 <div class="col-8">
-                    <input type="text" th:field="*{postalCode}" class="form-control" min=1 max=5 required/>
+                    <input type="text" th:field="*{c_postalCode}" class="form-control" min=1 max=5 required/>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-4 col-form-label">City</label>
                 <div class="col-8">
-                    <input type="text" th:field="*{city}" class="form-control" required/>
+                    <input type="text" th:field="*{c_city}" class="form-control" required/>
                 </div>
+            </div>
+            <div>
+              <input id="check_insured" type="checkbox" />
+            </div>
+            <div id="insured_data" class="m-3 hidden">
+              <div class="form-group row">
+                <label class="col-4 col-form-label">First name</label>
+                <div class="col-8">
+                    <input type="text" th:field="*{i_firstName}" class="form-control" max=50 />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-4 col-form-label">Last name</label>
+                <div class="col-8">
+                    <input type="text" th:field="*{i_lastName}" class="form-control" max=50 />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-4 col-form-label">SSN</label>
+                <div class="col-8">
+                    <input type="text" th:field="*{i_ssn}" class="form-control" min=13 max=13 />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-4 col-form-label">Address</label>
+                <div class="col-8">
+                    <input type="text" th:field="*{i_address}" class="form-control" max=50 />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-4 col-form-label">Postal code</label>
+                <div class="col-8">
+                    <input type="text" th:field="*{i_postalCode}" class="form-control" min=1 max=5 />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-4 col-form-label">City</label>
+                <div class="col-8">
+                    <input type="text" th:field="*{i_city}" class="form-control" />
+                </div>
+                <div class="form-group row">
+                  <label class="col-4 col-form-label">Start date</label>
+                  <div class="col-8">
+                      <input type="date" th:field="*{startDate}" class="form-control" required/>
+                  </div>
+              </div>
                 <div>
                     <button id="submit-form" type="submit" class="btn btn-primary">Continue</button>
                 </div>
@@ -59,8 +105,18 @@
               <p th:text="${premiumTravel}"></p>
             </div>
         </div>
-
         </div>
       </div>
+      <style>
+        #insured_data.hidden {
+          display: none;
+        }
+      </style>
+      <script>
+        check_insured.addEventListener('change', (e) => {
+          insured_data.classList.toggle('hidden')
+        })
+      </script>
+
 </body>
 </html>

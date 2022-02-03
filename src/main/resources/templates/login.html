@@ -3,19 +3,22 @@
   <head>
     <title tiles:fragment="title">Messages : Create</title>
     <link rel="stylesheet" href="bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+    <script src="/webjars/jquery/3.6.0/jquery.min.js"></script>
   </head>
-  <body>
-    <div class="container text-center">
-        <div>
-            <h1>Please login to continue!</h1>
+  <body class="vertical-center" style="background: linear-gradient(45deg, rgba(0,67,90,1) 0%, rgba(133,223,253,1) 46%, rgba(0,212,255,1) 100%);">
+    <!-- <div class="container text-center"> -->
+        <div class="card border-primary mb-3" style="max-width: 60rem; margin: auto; margin-top:auto; padding: 2.5rem;">
+        <div style="margin:auto; margin-bottom: 1rem;">
+            <h4 style="margin:auto;">Логирајте се за да продолжите!</h4>
         </div>
         <form th:action="@{/process_login}" th:object="${userLogin}" method="post" style="max-width: 600px; margin: 0 auto;">
         <div class="m-3">
             <div th:if="${param.error}">
-                Invalid username or password!
+                Невалиден username или password!
             </div>
             <div th:if="${param.logout}">
-                You have been logged out!
+                Се одлогиравте!
             </div>
             <div class="form-group row">
                 <label class="col-4 col-form-label">Username: </label>
@@ -31,7 +34,7 @@
                 </div>
             </div>
             <div>
-                <button type="submit" class="btn btn-primary">Login!</button>
+                <button type="submit" class="btn btn-primary" style="float: right; margin-bottom: 2rem; margin-top: 1rem;">Логирај се!</button>
             </div>
         </div>
         </form>

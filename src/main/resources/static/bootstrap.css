@@ -11698,3 +11698,41 @@ label,
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+.bcg-color {
+  background-color: #00435a;
+}
+
+@keyframes movingBox {
+  0%   {background-color:#00435a; left:0px; top:0px;}
+  25%  {background-color:#00769c; left:200px; top:0px;}
+  50%  {background-color:#0079a1; left:200px; top:200px;}
+  75%  {background-color:#0d92bd; left:0px; top:200px;}
+  100% {background-color:#1395bf; left:0px; top:0px;}
+}
+
+.moveBox {
+  width: 50px;
+  height: 50px;
+  background-color: #00435a;
+  position: relative;
+  animation-name: movingBox;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+}
+
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 30%;
+  left:50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+  
+}
+
+.gradient {
+  background: linear-gradient(45deg, rgba(0,67,90,1) 0%, rgba(133,223,253,1) 46%, rgba(0,212,255,1) 100%);
+}

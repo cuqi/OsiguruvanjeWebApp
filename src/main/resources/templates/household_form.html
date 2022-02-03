@@ -1,62 +1,70 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head> 
-    <title>HouseHold Insurance</title> 
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
-    <script src="/webjars/jquery/3.6.0/jquery.min.js"></script>
+
+<head>
+  <title>Домаќинско осигурување</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+  <script src="/webjars/jquery/3.6.0/jquery.min.js"></script>
 </head>
-<body>
-    <div class="card border-primary mb-3" style="max-width: 50rem;">
-        <div class="card-header">Household Insurace</div>
-        <div class="card-body">
-          <h4 class="card-title">Calculate premium</h4>
 
-          <div class="container text-center">
-            <form id="householdForm" th:action="@{/insurance/householdPost}" th:object="${householdInfo}"
-                method="post" style="max-width: 600px; margin: 0 auto;">
-            <div class="m-3">
-                <div class="form-group">
-                    <label for="selectType" class="form-label mt-4">Type of object</label>
-                    <select class="form-select" id="selectType" th:field="*{typeObject}">
-                      <option value="RESIDENCE">Residence</option>
-                      <option value="BUSINESS">Business</option>
-                      <option value="PORTABLE">Portable</option>
-                    </select>
-                  </div>
-                  <div class="form-group">
-                    <label for="selectCover" class="form-label mt-4">Type of cover</label>
-                    <select class="form-select" id="selectCover" th:field="*{typeHouseholdCover}">
-                      <option value = "STANDARD">Standard</option>
-                      <option value = "COMFORT">Comfort</option>
-                      <option value = "MEGA">Mega</option>
-                    </select>
-                  </div>
-
-                 <div class="form-group row">
-                    <label class="col-4 col-form-label">Area of household</label>
-                    <div class="col-8">
-                        <input type="number" th:field="*{areaOfObject}" class="form-control" min=30 max = 1000 required/>
-                    </div>
-                </div>      
-                  <div class="form-group row">
-                    <label class="col-4 col-form-label">Contract length</label>
-                    <div class="col-8">
-                        <input type="number" th:field="*{contractLenght}" class="form-control" min=1 max=5 required/>
-                    </div>
-                  </div>     
-                <div>
-                    <button id="submit-form" type="submit" class="btn btn-primary">Calculate</button>
-                </div>
+<body class="bg-light" style="background-color: #00435a;">
+  <div class="card border-primary mb-3" style="max-width: 50rem; margin: auto; margin-top: 5rem;">
+    <div class="card-header">Домаќинско осигурување</div>
+    <div class="card-body">
+      <div class="container text-start">
+        <form id="householdForm" th:action="@{/insurance/householdPost}" th:object="${householdInfo}" method="post"
+          style="max-width: 600px; margin: 0 auto;">
+          <div class="m-3">
+            <div class="form-group">
+              <label for="selectType" class="form-label mt-4">Тип на објект</label>
+              <select class="form-select" id="selectType" th:field="*{typeObject}">
+                <option value="RESIDENCE">Станбен објект</option>
+                <option value="BUSINESS">Деловен објект</option>
+                <option value="PORTABLE">Подвижен дом</option>
+              </select>
             </div>
-            </form>
+            <div class="form-group">
+              <label for="selectCover" class="form-label mt-4">Тип на покритие</label>
+              <select class="form-select" id="selectCover" th:field="*{typeHouseholdCover}">
+                <option value="STANDARD">Стандард</option>
+                <option value="COMFORT">Комфорт</option>
+                <option value="MEGA">Мега</option>
+              </select>
+            </div>
+            <div style="margin-top:1rem;"></div>
+            <div class="form-group row">
+              <label class="col-4 col-form-label">Површина на објект (во m2)</label>
+              <div class="col-8">
+                <input type="number" th:value="${oldAreaOfObject}" th:field="*{areaOfObject}" class="form-control" min=30 max=1000 required />
+              </div>
+            </div>
+            <div class="form-group row-cols-auto">
+              <label for="selectCover" class="form-label mt-4">Времетраење на договорот (во години)</label>
+              <select class="form-select" id="contractLenght" th:field="*{contractLenght}">
+                <option value="1">1 година</option>
+                <option value="3">3 години</option>
+                <option value="5">5 години</option>
+              </select>
+            </div>
+            <div style="margin-top:1rem;"></div>
             <div>
-              <p th:text="${messageHousehold}"></p>
-              <p th:text="${premiumHousehold}"></p>
+              <button id="submit-form" type="submit" class="btn btn-primary">Пресметај премија</button>
             </div>
-        </div>
-
-        </div>
+          </div>
+        </form>
+        <form id="continueForm" th:action="@{/insurance/createPolicy}" th:object="${householdInfo}" method="get">
+          <div>
+            <button id="continue" type="submit" class="btn btn-primary" style="margin-left: 40rem;">Продолжи</button>
+          </div>
+        </form>
       </div>
+    </div>
+    <div class="card border-primary mb-3" style="max-width: 50rem; margin: auto;">
+      <div style="margin: auto;">
+        <h5 style="margin: auto;" th:text="${messageHousehold}"></h5>
+      </div>
+    </div>
 </body>
+
 </html>
