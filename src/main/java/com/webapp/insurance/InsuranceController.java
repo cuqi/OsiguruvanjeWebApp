@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller 
@@ -68,6 +69,17 @@ public class InsuranceController {
     
 
     /* GET TRAVEL REQUEST */
+    
+    // @GetMapping(path = "/travel")
+    // public ModelAndView showTravelInsurance(Model model) {
+    //     model.addAttribute("travelInfo", new TravelInfoModel());
+    //     model.addAttribute("premiumTravel", premiumTravel);
+    //     model.addAttribute("messageTravel", messageTravel);
+    //     ModelAndView modelAndView = new ModelAndView();
+    //     modelAndView.setViewName("travel_form");
+    //     return modelAndView;
+    // }
+
     @GetMapping(path = "/travel")
     public String showTravelInsurance(Model model) {
         model.addAttribute("travelInfo", new TravelInfoModel());
@@ -75,6 +87,7 @@ public class InsuranceController {
         model.addAttribute("messageTravel", messageTravel);
         return "travel_form";
     }
+
     /* POST TRAVEL REQUEST */
     @PostMapping(path = "/travelPost")
     public String processTravelHealth(@ModelAttribute TravelInfoModel travelInfoModel, Model model) {

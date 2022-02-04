@@ -1,12 +1,110 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" th:href="@{/bootstrap.css}">
+  <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+  <title>StaySafe&trade;</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">StaySafe&trade;</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+        aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </nav>
+  <div class="container vertical-center" style="max-width: 50%;">
+
+    <div class="card border-primary mb-3">
+      <div class="card-header">Патничко осигурување</div>
+      <div class="card-body">
+        <div class="container text-center">
+          <form id="travelHealthForm" th:action="@{/insurance/travelPost}" th:object="${travelInfo}" method="post"
+            style="max-width: 600px; margin: 0 auto;">
+            <div class="m-3">
+              <div class="form-group">
+                <label for="selectType" class="form-label mt-4">Тип на полиса</label>
+                <select class="form-select" id="selectType" th:field="*{type}">
+                  <option value="INDIVIDUAL">Индивидуална</option>
+                  <option value="FAMILY">Фамилијарна</option>
+                  <option value="STUDENT">Студент</option>
+                  <option value="GROUP">Групна</option>
+                  <option value="BUSINESS">Бизнис</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="selectCover" class="form-label mt-4">Тип на покритие</label>
+                <select class="form-select" id="selectCover" th:field="*{cover}" required>
+                  <option value="VISA">ВИЗА</option>
+                  <option value="CLASSIC">КЛАСИК</option>
+                  <option value="VIP">ВИП</option>
+                </select>
+              </div>
+              <div style="margin-top:1rem;"></div>
+              <div class="form-group row">
+                <label class="col-4 col-form-label">Осигурани денови</label>
+                <div class="col-8">
+                  <input type="number" th:field="*{days}" class="form-control" th:value="${daysUpdate}" min=3 max=365
+                    required />
+                </div>
+              </div>
+              <div style="margin-top:1rem;"></div>
+              <div class="form-group row">
+                <label class="col-4 col-form-label">Number of insurers</label>
+                <div class="col-8">
+                  <input id="numPeople" type="number" th:field="*{numPeople}" class="form-control" min=1 max=10
+                    required />
+                </div>
+              </div>
+              <div style="margin-top:1rem;"></div>
+              <div>
+                <button id="submit-form" type="submit" class="btn btn-primary" style="float:right;">Calculate</button>
+              </div>
+            </div>
+          </form>
+          <div>
+            <p th:text="${messageTravel}"></p>
+            <p th:text="${premiumTravel}"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+<!-- <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head> 
     <title>Патничко осигурување</title> 
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
-    <script src="/webjars/jquery/3.6.0/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="bootstrap.css">
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">StaySafe&trade;</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </nav>
     <div class="card border-primary mb-3" style="max-width: 50rem;">
         <div class="card-header">Патничко осигурување</div>
         <div class="card-body">
@@ -54,8 +152,7 @@
               <p th:text="${premiumTravel}"></p>
             </div>
         </div>
-
         </div>
       </div>
 </body>
-</html>
+</html> -->

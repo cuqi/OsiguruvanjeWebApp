@@ -53,6 +53,14 @@ public class MainController {
     return modelAndView;
   }
 
+  @GetMapping("/test")
+  public ModelAndView showTest(Model model) {
+    ModelAndView modelAndView = new ModelAndView();
+    modelAndView.setViewName("test");
+
+    return modelAndView;
+  }
+
   @GetMapping("/loginTest")
   public ModelAndView showLoginForm1(Model model) {
     model.addAttribute("userLogin", new UserLogin());
@@ -141,5 +149,4 @@ public class MainController {
 
     return modelAndView;
   }
-
 }

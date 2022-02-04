@@ -1,40 +1,52 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head> 
-    <title>Automobile Liability Insurance</title> 
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
-    <script src="/webjars/jquery/3.6.0/jquery.min.js"></script>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" th:href="@{/bootstrap.css}">
+  <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+  <title>StaySafe&trade;</title>
 </head>
 <body>
-    <div class="card border-primary mb-3" style="max-width: 50rem;">
-        <div class="card-header">Automobile Liability Insurance</div>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">StaySafe&trade;</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+        aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </nav>
+  <div class="container vertical-center" style="max-width: 50%;">
+    <div class="card border-primary mb-3">
+        <div class="card-header">Автоодговорност</div>
         <div class="card-body">
-          <h4 class="card-title">Calculate premium</h4>
           <div class="container text-center">
             <form id="aoForm" th:action="@{/insurance/liabilityPost}" th:object="${aoInfo}"
                 method="post" style="max-width: 600px; margin: 0 auto;">
             <div class="m-3">
                 <div class="form-group row">
-                    <label class="col-4 col-form-label">Vehicle chassis</label>
+                    <label class="col-4 col-form-label">Шасија</label>
                     <div class="col-8">
                         <input type="text" th:field="*{chassis}" class="form-control" required/>
                     </div>
                 </div> 
+                <div style="margin-top:0.5rem;"></div>
                 <div class="form-group row">
-                    <label class="col-4 col-form-label">Vehicle registration number</label>
+                    <label class="col-4 col-form-label">Регистрација</label>
                     <div class="col-8">
                         <input type="text" th:field="*{regNum}" class="form-control" required/>
                     </div>
                 </div>    
+                <div style="margin-top:0.5rem;"></div>
                 <div class="form-group row">
-                    <label class="col-4 col-form-label">Vehicle owners SSN</label>
+                    <label class="col-4 col-form-label">Матичен број на возачот</label>
                     <div class="col-8">
                         <input type="text" th:field="*{ssn}" class="form-control" required/>
                     </div>
                 </div>   
                 <div>
-                    <button id="submit-form" type="submit" class="btn btn-primary">Calculate</button>
+                    <button id="submit-form" type="submit" class="btn btn-primary" style="float:right;">Пресметај премија</button>
                 </div>
             </div>
             </form>
@@ -46,5 +58,6 @@
 
         </div>
       </div>
+  </div>
 </body>
 </html>

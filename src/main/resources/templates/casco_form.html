@@ -1,4 +1,87 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" th:href="@{/bootstrap.css}">
+  <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+  <title>StaySafe&trade;</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">StaySafe&trade;</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+        aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </nav>
+  <div class="container vertical-center" style="max-width: 50%;">
+
+    <div class="card border-primary mb-3">
+      <div class="card-header">Каско осигурување</div>
+      <div class="card-body">
+        <div class="container text-center">
+          <form id="cascoForm" th:action="@{/insurance/cascoPost}" th:object="${cascoInfo}"
+              method="post" style="max-width: 600px; margin: 0 auto;">
+          <div class="m-3">
+              <div class="form-group">
+                  <label for="selectTypeCasco" class="form-label mt-4">Тип на каско</label>
+                  <select class="form-select" id="selectTypeCasco" th:field="*{typeCascoPolicy}" required> 
+                    <option value="FULL">Целосно</option>
+                    <option value="PARTIAL">Парцијално</option>
+                    <option value="BASIC">Основно</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="selectTypeValue" class="form-label mt-4">Ценовна категорија на возилото</label>
+                  <select class="form-select" id="selectTypeValue" th:field="*{typeValue}" required> 
+                    <option value="MARKET">Пазарна</option>
+                    <option value="NEW">Новонабавна</option>
+                  </select>
+                </div>
+              <div class="form-group row">
+                  <label class="col-4 col-form-label">Цена на возилото</label>
+                  <div class="col-8">
+                      <input type="number" th:field="*{vehiclePrice}" class="form-control" required/>
+                  </div>
+              </div>    
+              <div class="form-group">
+                  <label for="selectFranchise" class="form-label mt-4">Франшиза</label>
+                  <select class="form-select" id="selectFranchise" th:field="*{franchise}" required> 
+                    <option value="100">100</option>
+                    <option value="200">200</option>
+                    <option value="300">300</option>
+                    <option value="500">500</option>
+                    <option value="1000">1000</option>
+                  </select>
+                </div>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" th:field="*{windows}">
+                  <label class="form-check-label" for="flexSwitchCheckDefault">Вклучи осигурување на стакла?</label>
+                </div>
+              <div>
+                  <button id="submit-form" type="submit" class="btn btn-primary">Пресметај премија</button>
+              </div>
+          </div>
+          </form>
+          <div>
+            <p th:text="${messageCasco}"></p>
+            <p th:text="${premiumCasco}"></p>
+          </div>
+      </div>
+      </div>
+    </div>
+
+</body>
+
+</html>
+
+
+<!-- <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head> 
     <title>Casco Insurance</title> 
@@ -64,4 +147,4 @@
         </div>
       </div>
 </body>
-</html>
+</html> -->

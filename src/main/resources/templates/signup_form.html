@@ -7,10 +7,10 @@
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 </head>
-<body>
-    <div class="container text-center">
-        <div>
-            <h1>User Registration - Sign Up</h1>
+<body class="vertical-center">
+    <div class="card border-primary" style="padding:2rem;">
+        <div style="margin:auto; margin-bottom: 1rem;">
+            <h4 style="margin:auto;">Регистрација на нов корисник</h4>
         </div>
         <form th:action="@{/process_register}" th:object="${user}"
             method="post" style="max-width: 600px; margin: 0 auto;">
@@ -37,7 +37,7 @@
                 </div>
             </div>             
             <div>
-                <button type="submit" class="btn btn-primary">Sign Up</button>
+                <button type="submit" class="btn btn-primary" style="float: right; margin-bottom: 2rem; margin-top: 1rem;">Sign Up</button>
             </div>
         </div>
         </form>

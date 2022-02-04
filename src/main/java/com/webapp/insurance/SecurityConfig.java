@@ -64,7 +64,8 @@ public class SecurityConfig {
                 e.printStackTrace();
             }
         }).build();
- 
+    }
+}
         // .authorizeRequests()
         //     .antMatchers("/insurance/**").authenticated()
         //     .anyRequest().permitAll()
@@ -96,5 +97,3 @@ public class SecurityConfig {
 //         //     .logout().logoutUrl("/logout").invalidateHttpSession(true).deleteCookies("JSESSIONID").logoutSuccessUrl("/").permitAll();
  
 //         // http.csrf().disable();
-    }
-}
