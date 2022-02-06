@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html xmlns='http://www.w3.org/1999/xhtml' xmlns:th='http://www.thymeleaf.org'>
+
     <head>
         <title>Checkout</title>
-        <style>
+        <!-- <style>
             body {
                 font-family: 'arial';
             }
@@ -11,26 +12,32 @@
                 display: block;
                 margin: 12px;
             }
-        </style>
+        </style> -->
+        <meta charset="UTF-8">
+        <link rel="stylesheet" th:href="@{/bootstrap.css}">
+        <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+        <title>StaySafe&trade;</title>
     </head>
     <body>
-        <div class="moveBox"></div>
-        <form action='/charge' method='POST' id='checkout-form'>
-            <input type='hidden' th:value='${amount}' name='amount' />
-            <label>За плаќање:<span th:text='${amount/100}' /></label>
-            <!-- NOTE: data-key/data-amount/data-currency will be rendered by Thymeleaf -->
-            <script
-                src='https://checkout.stripe.com/checkout.js' 
-                class='stripe-button'
-                th:attr='data-key=${stripePublicKey},
-                         data-amount=${amount},
-                         data-currency=${currency}'
-                data-name='StaySafe'
-                data-description='Онлајн плаќање на полиса'
-                data-image='file://src\main\resources\static\bg_pic.png'
-                data-locale='auto'
-                data-zip-code='false'>
-            </script>
-        </form>
+        <div class="container vertical-center">
+            <form action='/charge' method='POST' id='checkout-form'>
+                <input type='hidden' th:value='${amount}' name='amount' />
+                <label>За плаќање:<span th:text='${amount/100}' /></label>
+                <!-- NOTE: data-key/data-amount/data-currency will be rendered by Thymeleaf -->
+                <script
+                    src='https://checkout.stripe.com/checkout.js' 
+                    class='stripe-button'
+                    th:attr='data-key=${stripePublicKey},
+                             data-amount=${amount},
+                             data-currency=${currency}'
+                    data-name='StaySafe'
+                    data-description='Онлајн плаќање на полиса'
+                    data-image='file://src\main\resources\static\bg_pic.png'
+                    data-locale='auto'
+                    data-zip-code='false'>
+                </script>
+            </form>
+        </div>
     </body>
 </html>

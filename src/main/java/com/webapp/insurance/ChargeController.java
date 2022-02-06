@@ -22,6 +22,7 @@ public class ChargeController {
     @PostMapping("/charge")
     public String charge(ChargeRequest chargeRequest, Model model) 
       throws StripeException {
+        System.out.println("vnatre vo charge controller");
         chargeRequest.setDescription("Example charge");
         chargeRequest.setCurrency(Currency.EUR);
         Charge charge = paymentsService.charge(chargeRequest);

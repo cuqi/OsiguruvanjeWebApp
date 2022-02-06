@@ -17,8 +17,10 @@ import com.webapp.classes.householdInsurance.HouseholdInfoModel;
 import com.webapp.classes.liabilityInsurance.AOInfoModel;
 import com.webapp.classes.travelInsurance.BookInfoModel;
 import com.webapp.classes.travelInsurance.TravelInfoModel;
-import com.webapp.webservice.ver2.*;
+import com.webapp.webservice.ver3.*;
 
+import org.springframework.core.env.Environment;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -55,30 +57,21 @@ public class InsuranceController {
     private String messageAccident;
 
     public TravelInfo g_travelInfo;
-    public AoInfo g_aoInfo;
     public HouseholdInfo g_householdInfo;
+    public AoInfo g_aoInfo;
+
     public CascoInfo g_cascoInfo;
     public AccidentInfo g_accidentInfo;
 
-    public HouseholdInfoModel g_householdInfoModel;
     public TravelInfoModel g_travelInfoModel;
+    public HouseholdInfoModel g_householdInfoModel;
     public AOInfoModel g_aoInfoModel;
     public AccidentInfoModel g_accidentInfoModel;
     public CascoInfoModel g_cascoInfoModel;
 
-    
-
+    public String bookMsg;
+    public double g_paymentAmount;
     /* GET TRAVEL REQUEST */
-    
-    // @GetMapping(path = "/travel")
-    // public ModelAndView showTravelInsurance(Model model) {
-    //     model.addAttribute("travelInfo", new TravelInfoModel());
-    //     model.addAttribute("premiumTravel", premiumTravel);
-    //     model.addAttribute("messageTravel", messageTravel);
-    //     ModelAndView modelAndView = new ModelAndView();
-    //     modelAndView.setViewName("travel_form");
-    //     return modelAndView;
-    // }
 
     @GetMapping(path = "/travel")
     public String showTravelInsurance(Model model) {
@@ -90,7 +83,7 @@ public class InsuranceController {
 
     /* POST TRAVEL REQUEST */
     @PostMapping(path = "/travelPost")
-    public String processTravelHealth(@ModelAttribute TravelInfoModel travelInfoModel, Model model) {
+    public String processTravelHealth(@ModelAttribute TravelInfoModel travelInfoModel, Model model, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         
         MyServiceService service = new MyServiceService();
         MyService port = service.getMyServicePort();
@@ -100,8 +93,6 @@ public class InsuranceController {
         travelInfo.setCover(TypeCover.valueOf(travelInfoModel.getCover().toString()));
         travelInfo.setDays(travelInfoModel.getDays());
         travelInfo.setNumPeople(travelInfoModel.getNumPeople());
-        travelInfo.setIsabove65(travelInfoModel.isIsabove65());
-        travelInfo.setIsbelow18(travelInfoModel.isIsbelow18());
         
         QuotationResponse qr = port.getTravelQuotation(travelInfo, AppAuthenticationSuccessHandler.defaultProperties.getProperty("sessionID"));
         if (qr == null) {
@@ -112,10 +103,11 @@ public class InsuranceController {
             if (qr.getCode() == 100) {
                 System.out.println("code: " + qr.getCode() + ", premium: " + qr.getPremium());
                 premiumTravel = String.valueOf(qr.getPremium());
-                model.addAttribute("travelInfo", travelInfoModel);
                 messageTravel = qr.getMessage();
+                g_travelInfoModel = travelInfoModel;
                 g_travelInfo = travelInfo;
-                return "redirect:/insurance/travel/createTPL";
+                typePolicy = 1;
+                redirectAttributes.addFlashAttribute("travelInfo", travelInfoModel);
             } else {
                 messageTravel = qr.getMessage();
             }
@@ -234,9 +226,6 @@ public class InsuranceController {
 
     @PostMapping(path = "/createPolicy")
     public String createHousehold(@ModelAttribute BookInfoModel bookInfoModel, Model model, RedirectAttributes redirectAttributes) {
-
-        System.out.println("Vrednost na globalbook" + g_householdInfoModel.toString());
-
         String paymentAmount = "0";
 
         MyServiceService service = new MyServiceService();
@@ -310,13 +299,14 @@ public class InsuranceController {
         
         if (bookResponse.getCode() == 100) {
             model.addAttribute("payment", paymentAmount);
+            g_paymentAmount = Double.valueOf(paymentAmount);
             return "redirect:/checkout";
         } else {
+            bookMsg = bookResponse.getMessage();
+            model.addAttribute("bookMsg", bookMsg);
             redirectAttributes.addFlashAttribute("bookInfoModel", bookInfoModel);
             return "redirect:/insurance/createPolicy";
         }
-
-
     }
 
     /* GET LIABILITY REQUEST */
@@ -471,4 +461,20 @@ public class InsuranceController {
         System.out.println("loggedinuser: " + loggedInEmail);
         return loggedInEmail;
     }
+
+    // @Autowired
+    // private Environment secretKey;
+
+    // @RequestMapping("/checkout")
+    // public String checkout(Model model) {
+    //     System.out.println("VNATRE VO CHECK OUT INS CONTROLLER");
+    //     System.out.println("vrednost na payment: " + String.valueOf(g_paymentAmount));
+    //     if (model.containsAttribute("payment")) {
+    //         System.out.print("there is payment attr");
+    //     }
+    //     model.addAttribute("amount", g_paymentAmount * 100); // in cents
+    //     model.addAttribute("stripePublicKey", secretKey.getRequiredProperty("stripe.key.id"));
+    //     model.addAttribute("currency", ChargeRequest.Currency.EUR);
+    //     return "checkout";
+    // }
 }

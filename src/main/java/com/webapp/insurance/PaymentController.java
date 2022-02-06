@@ -18,14 +18,13 @@ public class PaymentController {
 
     @RequestMapping("/checkout")
     public String checkout(Model model) {
-        int amount = 1;
+        int amount = 50;
         if (model.containsAttribute("payment")) {
             System.out.print("there is payment attr");
         }
-        
         model.addAttribute("amount", amount * 100); // in cents
         model.addAttribute("stripePublicKey", secretKey.getRequiredProperty("stripe.key.id"));
-        model.addAttribute("currency", ChargeRequest.Currency.MKD);
+        model.addAttribute("currency", ChargeRequest.Currency.EUR);
         return "checkout";
     }
 }

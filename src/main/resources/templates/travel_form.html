@@ -20,7 +20,6 @@
     </div>
   </nav>
   <div class="container vertical-center" style="max-width: 50%;">
-
     <div class="card border-primary mb-3">
       <div class="card-header">Патничко осигурување</div>
       <div class="card-body">
@@ -56,7 +55,7 @@
               </div>
               <div style="margin-top:1rem;"></div>
               <div class="form-group row">
-                <label class="col-4 col-form-label">Number of insurers</label>
+                <label class="col-4 col-form-label">Број на осигуреници</label>
                 <div class="col-8">
                   <input id="numPeople" type="number" th:field="*{numPeople}" class="form-control" min=1 max=10
                     required />
@@ -64,21 +63,25 @@
               </div>
               <div style="margin-top:1rem;"></div>
               <div>
-                <button id="submit-form" type="submit" class="btn btn-primary" style="float:right;">Calculate</button>
+                <button id="submit-form" type="submit" class="btn btn-primary" style="float:centre;">Пресметај премија</button>
               </div>
             </div>
           </form>
-          <div>
-            <p th:text="${messageTravel}"></p>
-            <p th:text="${premiumTravel}"></p>
-          </div>
         </div>
       </div>
+      <form id="continueForm" th:action="@{/insurance/createPolicy}" th:object="${householdInfo}" method="get">
+        <div>
+          <button id="continue" type="submit" class="btn btn-primary" style="margin-left: 35rem; margin-bottom: 2rem;">Продолжи</button>
+        </div>
+      </form>
     </div>
   </div>
-
+  <div class="card border-primary mb-3" style="max-width: 50rem; margin: auto;">
+    <div style="margin: auto;">
+      <h5 style="margin: auto;" th:text="${messageTravel}"></h5>
+    </div>
+  </div>
 </body>
-
 </html>
 
 
